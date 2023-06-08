@@ -358,7 +358,6 @@ class Session(object):
                           master=tk_root)
         app.mainloop()
 
-
 class OutputReader(object):
     """Reads AVL output files. Filetype is determined based on file extension"""
     def __init__(self, file_path):
@@ -468,8 +467,9 @@ class OutputReader(object):
             if match is not None:
                 surface_name = match.group(1).strip()
 
+            pattern = r'\s+j\s+Xle\s+Yle\s+Zle\s+Chord\s+Area\s+c_cl\s+ai\s+cl_norm\s+cl\s+cd\s+cdv\s+cm_c/4\s+cm_LE\s+C\.P\.x/c'
             # Find start of table based on header
-            if re.search('(j\s+Yle\s+Chord)', line) is not None:
+            if re.search(pattern, line) is not None:
                 start_line = line_nr
 
             # Find end of table based on the empty line
